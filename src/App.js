@@ -13,7 +13,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 function App() {
   const [posts, setPosts] = React.useState([]);
   const [liked, setLiked] = React.useState(false);
-  
 
   const getPosts = () => {
     endpoint
@@ -26,11 +25,14 @@ function App() {
 
   const handleCreate = () => {
     endpoint
-      .post('/posts', {
+      .post("/posts", {
         title: "this is new post title",
         body: "this is the new body text",
       })
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        alert("New post successfully created!");
+      })
       .catch((error) => console.error(error));
   };
 
@@ -46,7 +48,6 @@ function App() {
       .catch((error) => console.error(error));
   };
 
- 
   const handleDelete = (id) => {
     endpoint
       .delete(`/posts/${id}`)
@@ -63,7 +64,9 @@ function App() {
   return (
     <div style={{ textAlign: "center" }}>
       <h1>Blogs' Page </h1>
-      <Button variant="contained" onClick={()=>handleCreate()}>Create New Post</Button>
+      <Button variant="contained" onClick={() => handleCreate()}>
+        Create New Post
+      </Button>
       <h3>Recent Posts[{posts.length}] : </h3>
 
       <div
@@ -105,7 +108,7 @@ function App() {
                     >
                       Delete
                     </Button>
-                    <Button >
+                    <Button>
                       {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                     </Button>
                   </CardActions>
