@@ -26,7 +26,7 @@ function App() {
 
   const handleCreate = () => {
     endpoint
-      .post({
+      .post('/posts', {
         title: "this is new post title",
         body: "this is the new body text",
       })
@@ -36,7 +36,7 @@ function App() {
 
   const handleEdit = (id) => {
     endpoint
-      .put(`${process.env.REACT_APP_BASE_URL}/posts/${id}`, {
+      .put(`/posts/${id}`, {
         title: "this blog is changed",
         body: "but nothing is touched",
       })
@@ -49,7 +49,7 @@ function App() {
  
   const handleDelete = (id) => {
     endpoint
-      .delete(`${process.env.REACT_APP_BASE_URL}/posts/${id}`)
+      .delete(`/posts/${id}`)
       .then((response) =>
         alert("Successfully deleted! You can check the Network section!")
       )
@@ -62,8 +62,10 @@ function App() {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <h1>Blogs' Page</h1>
-      <h3>Recent Posts[{posts.length}]: </h3>
+      <h1>Blogs' Page </h1>
+      <Button variant="contained" onClick={()=>handleCreate()}>Create New Post</Button>
+      <h3>Recent Posts[{posts.length}] : </h3>
+
       <div
         style={{
           display: "grid",
